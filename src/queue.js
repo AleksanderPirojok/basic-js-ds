@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError, ListNode } = require('../extensions/index.js');
 
 // const { ListNode } = require('../extensions/list-node.js');
 
@@ -14,21 +14,38 @@ const { NotImplementedError } = require('../extensions/index.js');
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
 class Queue {
+    constructor () {
+        this.head = null;
+        this.length = 0;
+    }
 
-  getUnderlyingList() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    getUnderlyingList() {
+        return this.head;
+    }
 
-  enqueue(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    enqueue(value) {
 
-  dequeue() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+        if (this.length === 0) {
+            this.head = new ListNode(value);
+        } else {
+            let current = this.head;
+
+            while (current.next) {
+                current = current.next;
+            }
+
+            current.next = new ListNode(value);
+        }
+
+        this.length++;
+    }
+
+    dequeue() {
+        const result = this.head;
+        this.head = result.next;
+        this.length--;
+        return result.value;
+    }
 }
 
 module.exports = {
