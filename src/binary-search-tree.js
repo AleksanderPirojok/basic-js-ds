@@ -57,9 +57,24 @@ class BinarySearchTree {
         return searchNode(this.start, data);
     }
 
-    find(/* data */) {
-        throw new NotImplementedError('Not implemented');
-        // remove line with error and write your code here
+    find(data) {
+        const searchData = (node, data) => {
+            if (!node) {
+                return null;
+            }
+
+            if (node.data === data) {
+                return node;
+            }
+
+            if (data < node.data) {
+                return searchData(node.left, data);
+            } else {
+                return searchData(node.right, data);
+            }
+        }
+
+        return searchData(this.start, data);
     }
 
     remove(data) {
